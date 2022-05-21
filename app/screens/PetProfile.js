@@ -37,9 +37,9 @@ function PetProfile({navigation, route}) {
             <Text style={{fontFamily: 'roboto-700', marginTop: 20, color: '#eeebdd'}}>Type: {pet.type}</Text>
             {pet.type === 'Dog' ? <Text style={{fontFamily: 'roboto-700', marginTop: 20, color: '#eeebdd'}}>Breed: {pet.breed}</Text> : null}
             <Text style={{fontFamily: 'roboto-700', marginTop: 20, color: '#eeebdd'}}>Diseases:</Text>
-            {pet.diseases.map((disease, index) => (
+            {pet.diseases ? pet.diseases.map((disease, index) => (
               <Text key={index} style={{fontFamily: 'roboto-regular', marginTop: 20, color: '#eeebdd'}}>{disease}</Text>
-            ))}
+            )) : null}
           </View>
         }
       </View>

@@ -17,7 +17,8 @@ function RegisterPet({navigation, route}) {
     const [gender, setGender] = useState('')
     const [type, setType] = useState('')
     const [breed, setBreed] = useState('')
-    const [frequency, setFrequency] = useState('')
+    const [firstMeal, setFirstMeal] = useState('')
+    const [secondMeal, setSecondMeal] = useState('')
     const [diseases, setDiseases] = useState([])
 
     const [loading, setLoading] = useState(false)
@@ -33,7 +34,8 @@ function RegisterPet({navigation, route}) {
         type: type,
         breed: breed,
         diseases: diseases,
-        frequency: frequency
+        firstMeal: firstMeal,
+        secondMeal: secondMeal
       }
       let id = uuid.v4()
       await AsyncStorage.setItem('@id', id)
@@ -94,7 +96,8 @@ function RegisterPet({navigation, route}) {
           {type === 'Dog' ?
             <TextInput maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "85%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", marginTop: 20, alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Pet Breed'} onChangeText={(text) => setBreed(text)} value={breed}/>
           : null}
-          <TextInput keyboardType="numeric" maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "85%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", marginTop: 20, alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Food Disnpenser Frequency'} onChangeText={(text) => setFrequency(text)} value={frequency}/>
+          <TextInput keyboardType="numeric" maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "85%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", marginTop: 20, alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Scheduled time for the first meal'} onChangeText={(text) => setFirstMeal(text)} value={firstMeal}/>
+          <TextInput keyboardType="numeric" maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "85%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", marginTop: 20, alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Scheduled time for the second meal'} onChangeText={(text) => setSecondMeal(text)} value={secondMeal}/>
           <View style={{display: 'flex', flexDirection: 'row', width: '85%', height: 50, marginTop: 20, justifyContent: 'space-between', alignSelf: 'center'}}>
             <TextInput keyboardType="numeric" maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "47%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Pet Age'} onChangeText={(text) => setAge(text)} value={age}/>
             <TextInput keyboardType="numeric" maxLength={50} selectionColor={'#eeebdd'} keyboardAppearance="dark" style={{height: 50, width: "47%", backgroundColor: "transparent", borderBottomWidth: 1, borderBottomColor: '#505050', paddingLeft: 5, color: "#eeebdd", fontSize: 17, fontFamily: "roboto-regular", alignSelf: 'center'}} placeholderTextColor={'#696969'} placeholder={'Pet Weight'} onChangeText={(text) => setWeight(text)} value={weight}/>
