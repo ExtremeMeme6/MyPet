@@ -16,8 +16,10 @@ const Stack = createStackNavigator();
 function App() {
   
   const [loading, setLoading] = useState(true)
+  const [exists, setExists] = useState(false)
 
   const _loadAssetsAsync = async() =>{
+
     let images = [    
       require('./app/assets/arrow-back.png'),
       require('./app/assets/edit.png'),
@@ -26,12 +28,9 @@ function App() {
       require('./app/assets/female.png'),
       require('./app/assets/add.png'),
     ]
-
-    await AsyncStorage.clear()
   
     let fonts = [
       {'roboto-700': require('./app/assets/fonts/roboto-700.ttf')},
-      {'archivo-black-regular': require('./app/assets/fonts/archivo-black-regular.ttf')},
       {'roboto-regular': require('./app/assets/fonts/roboto-regular.ttf')},
     ]
   
@@ -44,9 +43,16 @@ function App() {
     });
   
     const fontAssets = fonts.map(font => Font.loadAsync(font));
+
+    const id = await AsyncStorage.getItem('@id')
+
+    if(id){
+      setExists(true)
+    }
   
     await Promise.all(imageAssets);
     await Promise.all(fontAssets);
+    
   }
 
     if(loading){
@@ -58,13 +64,23 @@ function App() {
         />
       )
     }
-    else{
+    else if(exists){
       return (
         <NavigationContainer>
           <Stack.Navigator screenOptions={{headerStyle: {backgroundColor: '#151010', shadowColor: '#100505'}, headerTintColor: '#eeebdd', headerBackTitleVisible: false, headerBackImage: () => <Image source={require('./app/assets/arrow-back.png')} style={{width: 30, height: 35, marginLeft: 20}} />}}>
             <Stack.Screen name="Home" component={HomeScreen} options={{headerLeft: () => null}}/>
             <Stack.Screen name="Pet Profile" component={PetProfile}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
+    else{
+      return (
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerStyle: {backgroundColor: '#151010', shadowColor: '#100505'}, headerTintColor: '#eeebdd', headerBackTitleVisible: false, headerBackImage: () => <Image source={require('./app/assets/arrow-back.png')} style={{width: 30, height: 35, marginLeft: 20}} />}}>
             <Stack.Screen name="Register Pet" component={RegisterPet}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={{headerLeft: () => null}}/>
+            <Stack.Screen name="Pet Profile" component={PetProfile}/>
           </Stack.Navigator>
         </NavigationContainer>
       );
